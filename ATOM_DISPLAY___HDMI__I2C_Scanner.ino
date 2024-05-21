@@ -1,5 +1,5 @@
 #include <M5AtomDisplay.h>
-M5AtomDisplay gfx( xxx, xxxx,  xx);    //     !!  edit (XX) with YOUR HDMI display value !!
+M5AtomDisplay gfx( 480, 1920,  50);
 
 
 
@@ -18,11 +18,10 @@ void Scanner ()
 {
   gfx.fillScreen(TFT_BLACK);
   gfx.display();
-//  gfx.print ();
-  gfx.setCursor(500, 10);
+  gfx.setCursor(300, 10);
   gfx.setTextSize(7);
   gfx.setTextColor(TFT_BLUE);
-  gfx.println ("I2C scanner. Scanning ...");
+  gfx.println (" Scanner 4 I2C - Scanning Now...");
   byte count = 0;
 
   Wire.begin();
@@ -31,6 +30,7 @@ void Scanner ()
     Wire.beginTransmission (i);          // Begin I2C transmission Address (i)
     if (Wire.endTransmission () == 0)  // Receive 0 = success (ACK response) 
     {
+      delay (1000);
       gfx.setCursor(520, 150);
       gfx.setTextSize(4);
       gfx.setTextColor(TFT_YELLOW);
@@ -39,22 +39,30 @@ void Scanner ()
       gfx.print (" (0x");
       gfx.print (i, HEX);     // PCF8574 7 bit address
       gfx.println (")  ***");
-      count++;
+      delay (2000);
+      gfx.clearDisplay();
+      gfx.setCursor(300, 10);
+      gfx.setTextSize(7);
+      gfx.setTextColor(TFT_BLUE);
+      gfx.println (" Scanner 4 I2C - Scanning Now...");
+        count++;
     }
   }
   gfx.setCursor(720, 200);
   gfx.setTextSize(4);
+  delay (500);
   gfx.print ("Found ");      
   gfx.print (count, DEC);        // numbers of devices
-  gfx.print (" device(s).");
-  delay (2000);
-  //gfx.clearDisplay();
+  gfx.println (" device(s).");
+  delay (1000);
+  gfx.clearDisplay();
+  
 }
 
 void loop()
 {
   Scanner ();
-  delay (1000);
+  delay (1500);
   
 }
 
