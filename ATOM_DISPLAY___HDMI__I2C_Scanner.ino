@@ -1,5 +1,5 @@
 #include <M5AtomDisplay.h>
-M5AtomDisplay gfx( 480, 1920,  50);
+M5AtomDisplay gfx( xxx, xxxx,  xx);    //     !!  edit (XX) with YOUR HDMI display value !!
 
 
 
